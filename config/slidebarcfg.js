@@ -7,3 +7,4 @@ var conf2 = {};
 var conf3 = {};
 var conf4 = {};
 var conf5 = {};
+var conf7 = {};
