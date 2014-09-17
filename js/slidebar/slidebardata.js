@@ -1,7 +1,9 @@
 /**
  * Created by leiting on 14/9/11.
  */
-define(function () {
+(function (arg) {
+
+    var self = arg;
 
     //定义左侧仪表盘列表数据集对象
     var slidebardata = {};
@@ -17,6 +19,11 @@ define(function () {
             uchartcate: "BAR",
             uchartname: "柱状图",
             iconname: "bar"
+        },
+        {
+            uchartcate: "HBAR",
+            uchartname: "柱状图",
+            iconname: "hbar"
         },
         {
             uchartcate: "CICLE",
@@ -52,6 +59,10 @@ define(function () {
             uchartcate: "SCATTER",
             uchartname: "散点图",
             iconname: "scatter"
+        },{
+            uchartcate: "NUMBER",
+            uchartname: "数字图",
+            iconname: "number"
         }];
 
     /***
@@ -100,5 +111,5 @@ define(function () {
         slidebardata.data = [];
     };
 
-    return slidebardata;
-});
+    self.slidebardata = slidebardata;
+})(nameSpace.reg("dashboard.slidebar"));

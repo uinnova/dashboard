@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/chartsetting.css">
+</head>
+<body>
+<div>
+    <div class="uchart_setting_dialog uchart_setting_dialog_left">
+        <div class="uchart_setting_title">基本属性</div>
+
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title">标题</div>
+            <div><input class="uchart_setting_attr_text" id="chartTitle" placeholder="请输入标题" /></div>
+        </div>
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title">边距</div>
+            <div><input class="uchart_setting_attr_text" id="chartOffset" placeholder="请输入边距-数字" /></div>
+        </div>
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title">X轴</div>
+            <div><input type="checkbox" class="uchart_setting_attr_checkbox" id="chartxaxis"></div>
+        </div>
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title">Y轴</div>
+            <div><input type="checkbox" class="uchart_setting_attr_checkbox" id="chartyaxis"></div>
+        </div>
+
+        <div class="uchart_setting_title">数据属性</div>
+
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title">所属CI</div>
+            <div><input class="uchart_setting_attr_text" id="chartdatasourcehost" placeholder="请输入IP或主机名等CI的关键字" /></div>
+        </div>
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title">选择KPI</div>
+            <div>
+                <select class="uchart_setting_attr_select" id="chartdatasourcekpi">
+                    <option value="undefined">请选择</option>
+                    <option value="cpu">cpu</option>
+                    <option value="memory">memory</option>
+                </select>
+            </div>
+        </div>
+        <div class="uchart_setting_attr">
+            <div class="uchart_setting_attr_title"></div>
+            <div>实时&nbsp;&nbsp;<input type="checkbox" id="chartdatatype_ontime" class="uchart_setting_attr_checkbox">&nbsp;&nbsp;历史&nbsp;&nbsp;<input type="checkbox" id="chartdatatype_history" class="uchart_setting_attr_checkbox"></div>
+        </div>
+        <div class="uchart_setting_attr uchart_setting_attr_hidden" id="uchart_setting_attr_refresh">
+            <div class="uchart_setting_attr_title">刷新间隔</div>
+            <div><input class="uchart_setting_attr_text" id="chartrefresh" style="width: 100px;" placeholder="请输入刷新间隔-数字" />&nbsp;&nbsp;秒</div>
+        </div>
+        <div class="uchart_setting_attr uchart_setting_attr_hidden" id="uchart_setting_attr_daterange">
+            <div class="uchart_setting_attr_title">时间范围</div>
+            <div><input class="uchart_setting_attr_text" id="chartdaterange" /></div>
+            <input type="hidden" id="chartstarttime" />
+            <input type="hidden" id="chartendtime" />
+        </div>
+    </div>
+    <div class="uchart_setting_dialog uchart_setting_dialog_right" id="chartpreview">
+        <div>点击预览</div>
+    </div>
+</div>
+</body>
+</html>

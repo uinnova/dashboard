@@ -1,7 +1,9 @@
 /**
  * Created by leiting on 14/9/11.
  */
-define(["slidebar"], function (slidebar) {
-    var d = slidebar;
-    console.log(d);
-});
+
+(function () {
+    var slidebar = dashboard.slidebar.slidebar;
+    var sb = new slidebar("tab_6_4");
+    sb.init();
+})();
