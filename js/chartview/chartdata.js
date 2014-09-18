@@ -38,19 +38,19 @@
      */
     fn.DataSource = {};
 
-    fn.DataSource.AREA = function () {
+    fn.DataSource.AREA = function (option) {
 
     };
 
-    fn.DataSource.BAR = function () {
+    fn.DataSource.BAR = function (option) {
 
     };
 
-    fn.DataSource.HBAR = function () {
+    fn.DataSource.HBAR = function (option) {
 
     };
 
-    fn.DataSource.CICLE = function () {
+    fn.DataSource.CICLE = function (option) {
 
         //随机生成环状图的数据
         var temppiepdataset = [];
@@ -63,31 +63,31 @@
 
     };
 
-    fn.DataSource.DASHBOARD = function () {
+    fn.DataSource.DASHBOARD = function (option) {
 
     };
 
-    fn.DataSource.FUNNEL = function () {
+    fn.DataSource.FUNNEL = function (option) {
 
     };
 
-    fn.DataSource.LINE = function () {
+    fn.DataSource.LINE = function (option) {
 
     };
 
-    fn.DataSource.PIE = function () {
+    fn.DataSource.PIE = function (option) {
 
     };
 
-    fn.DataSource.RADAR = function () {
+    fn.DataSource.RADAR = function (option) {
 
     };
 
-    fn.DataSource.SCATTER = function () {
+    fn.DataSource.SCATTER = function (option) {
 
     };
 
-    fn.DataSource.NUMBER = function () {
+    fn.DataSource.NUMBER = function (option) {
 
     };
 

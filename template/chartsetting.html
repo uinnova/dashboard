@@ -25,30 +25,32 @@
 
         <div class="uchart_setting_title">数据属性</div>
 
-        <div class="uchart_setting_attr">
-            <div class="uchart_setting_attr_title">所属CI</div>
-            <div><input class="uchart_setting_attr_text" id="chartDatasourcehost" value="{{chartDatasourcehost}}" placeholder="请输入IP或主机名等CI的关键字" /></div>
-        </div>
-        <div class="uchart_setting_attr">
+        <div class="uchart_setting_attr" style="float: left;height: 30px;">
             <div class="uchart_setting_attr_title">选择KPI</div>
             <div>
-                <select class="uchart_setting_attr_select" id="chartDatasourceKPI">
-                    <option value="cpu">cpuc</option>
-                    <option value="memory">memoryc</option>
-                </select>
+                <input style="width: 100px;height: 30px;" id="chartDatasourceKPI" />
             </div>
         </div>
-        <div class="uchart_setting_attr">
+
+        <div class="uchart_setting_attr" style="float: left;height: 30px;">
+            <div class="uchart_setting_attr_title">选择CI</div>
+            <div><input style="width: 100px;height: 28px;;" id="chartDatasourcehost" placeholder="请先选择KPI" /></div>
+        </div>
+
+        <div class="uchart_setting_attr" style="clear: left;">
             <div class="uchart_setting_attr_title"></div>
             <div>{{chartDataTypeonTime chartonTimeCheck}}{{chartDataTypeHistory chartHistoryCheck}}</div>
         </div>
         <div class="uchart_setting_attr uchart_setting_attr_hidden" id="uchart_setting_attr_refresh">
             <div class="uchart_setting_attr_title">刷新间隔</div>
-            <div><input class="uchart_setting_attr_text" id="chartrefresh" style="width: 100px;" value="{{chartRefreshInterval}}" placeholder="请输入刷新间隔-数字,0不刷新" />&nbsp;&nbsp;秒</div>
+            <div><input class="uchart_setting_attr_text" id="chartrefresh" style="width: 100px;" value="{{chartRefreshInterval}}" placeholder="默认0不刷新" />&nbsp;&nbsp;秒</div>
         </div>
         <div class="uchart_setting_attr uchart_setting_attr_hidden" id="uchart_setting_attr_daterange">
             <div class="uchart_setting_attr_title">时间范围</div>
-            <div><input class="uchart_setting_attr_text" id="chartdaterange" /></div>
+            <div><!--<input class="uchart_setting_attr_text" id="chartdaterange" value="{{chartDateRange}}" />-->
+                <input class="uchart_setting_attr_text" style="width: 100px;" id="chartdatehour" value="{{chartDateHour}}" placeholder="小时，默认0" />
+                <input class="uchart_setting_attr_text" style="width: 100px;" id="chartdatemin" value="{{chartDateMin}}" placeholder="分钟，默认0" />
+            </div>
             <input type="hidden" id="chartstarttime" value="{{chartStarttime}}" />
             <input type="hidden" id="chartendtime" value="{{chartEndtime}}" />
         </div>

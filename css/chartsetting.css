@@ -3,18 +3,18 @@
     color: #666666;
 }
 .uchart_setting_dialog_left{
-    width: 300px;
+    width: 350px;
     height: 258px;
 }
 .uchart_setting_dialog_right{
-    width: 258px;
+    width: 208px;
     height: 258px;
     margin-top: 23px;
     background-color: #EEEEEE;
     cursor: pointer;
 }
 .uchart_setting_dialog_right div{
-    padding-left: 85px;
+    padding-left: 75px;
     padding-top: 110px;
     color: #999999;
     font-style: italic;

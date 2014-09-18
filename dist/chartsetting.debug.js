@@ -1,6 +1,6 @@
 /*!
  * dashboard - JS for Debug
- * @licence dashboard - v0.1.0 (2014-09-17)
+ * @licence dashboard - v0.1.0 (2014-09-18)
  */
 /**
  * Created by leiting on 14/9/15.
@@ -68,13 +68,29 @@
     var runSetting = function (editorobj,cell,graphobj) {
 
         var html = null;
+        var kpiResult = "";
+        var kpiRelCIResult = [];
         //获取cell原有设置的值
         var chartOptions = cell.getAttribute("chartOptions",null);
         var chartOptionsobj = {};
+        //将cell的设置option转换成对象
         if(chartOptions){
             chartOptionsobj = eval("("+chartOptions+")");
         }
+        //获取cell的仪表盘所属类型
         var chartCate = cell.getAttribute("chartcate",null);
+
+        var kpiData = [{id:"CPU利用率",text:"CPU利用率"},{id:"内存利用率",text:"内存利用率"}];
+
+        var kpiRelCIData = [{id:"网银主机",text:"网银主机"},{id:"结算主机",text:"结算主机"},{id:"第三方主机",text:"第三方主机"}];
+
+        if(chartOptionsobj){
+            //申明变量用于保存KPI名称
+            kpiResult = chartOptionsobj.chartDatasourceKPI;
+            //申明变量用于保存KPI所关联的CI唯一建
+            kpiRelCIResult = chartOptionsobj.chartDatasourcehost;
+
+        }
         //初始化页面
         html = initConfigPage(chartOptions);
 
@@ -93,7 +109,43 @@
                 error.push("边距：必须为数字");
             }
 
+            if( !kpiResult ){
+                error.push("KPI必须选择");
+            }
+
+            if( kpiRelCIResult && !(kpiRelCIResult.length > 0)){
+                error.push("CI必须选择至少一项");
+            }
+
+            if( !kpiRelCIResult ){
+                error.push("CI必须选择至少一项");
+            }
+
+            //判断选择历史后是否填写了小时和分钟，如果都没有填写则不通过
+            if($("#chartdatatype_history").attr("checked")){
+                if((!$("#chartdatehour").val() && !$("#chartdatemin").val())){
+
+                    error.push("选择历史后，小时和分钟至少填写一项大于0的数字");
+                }
+                if($("#chartdatehour").val() && !/\d+/g.test($("#chartdatehour").val())){
+                    error.push("小时必须为数字");
+                }
+
+                if($("#chartdatemin").val() && !/\d+/g.test($("#chartdatemin").val())){
+                    error.push("分钟必须为数字");
+                }
+
+                if((!$("#chartdatehour").val() || $("#chartdatehour").val() == 0) && $("#chartdatemin").val() <= 0){
+                    error.push("小时分钟不能同时为0")
+                }
+
+                if((!$("#chartdatemin").val() || $("#chartdatemin").val() == 0) && $("#chartdatehour").val() <= 0){
+                    error.push("小时分钟不能同时为0")
+                }
+            }
+
             if(error.length === 0){
+                console.log(getResultOptions());
                 cell.setAttribute("chartOptions",getResultOptions());
                 editorobj.graph.refresh(cell);
                 graphobj.utils.alert("配置已更新");
@@ -103,10 +155,71 @@
             }
         });
 
+        /**
+         * 此段落主要给KPI及选择CI进行初始化
+         */
+        //初始化KPI下拉菜单
+        $("#chartDatasourceKPI").val(kpiResult).select2({
+            data: kpiData,
+            placeholder: "请点选KPI",
+            allowClear: true
+        });
 
+        //如果已经选择了KPI则初始化主机下拉菜单
+        if(kpiResult){
+            $("#chartDatasourcehost").val(kpiRelCIResult).select2({
+                data: kpiRelCIData,
+                placeholder: "请点选KPI",
+                allowClear: true,
+                multiple: true
+            });
+        };
+
+        //当选择KPI，初始化主机下拉菜单,并给kpiResult赋值
+        //如果是清空KPI，则清空保存的对应值及主机对应的结果值
+        $("#chartDatasourceKPI").on("change", function (e) {
+            if(e.val){
+                kpiResult = e.val;
+                if(kpiResult){
+                    $("#chartDatasourcehost").val(kpiRelCIResult).select2({
+                        data: kpiRelCIData,
+                        placeholder: "请点选KPI",
+                        allowClear: true,
+                        multiple: true
+                    });
+                }
+            }else{
+                $("#chartDatasourcehost").val([]).select2({
+                    data: [],
+                    placeholder: "请点选KPI",
+                    allowClear: true,
+                    multiple: true
+                });
+                kpiResult = "";
+                kpiRelCIResult = [];
+            }
+        });
+
+        //当选择了主机后，给主机的结果值赋值
+        $("#chartDatasourcehost").on("change", function (e) {
+            if(e.val){
+                kpiRelCIResult = [];
+                for(var i = 0 ; i < e.val.length ; i++){
+                    kpiRelCIResult.push(e.val[i]);
+                }
+            }
+        });
+
+        /**
+         * 结束KPI及选择CI进行初始化
+         */
+
+        /**
+         * 初始化图表按照实时刷新和历史查询那部分的DOM节点
+         * @type {*|jQuery|HTMLElement}
+         */
         var chartDatatypeOntime = $("#chartdatatype_ontime");
         var chartDatatypeHistory = $("#chartdatatype_history");
-        var chartDatasourceKPI = $("#chartDatasourceKPI");
         var chartPreview = $("#chartpreview");
 
         //初始化实时和历史已经设置的显示
@@ -132,7 +245,7 @@
                     if(chartDataModel.getData()){
                         var chartInstance = chartView.getPreviewChartInstance({chartCate: chartCate,chartRefreshInterval:chartOptions.chartRefreshInterval},chartDataModel);
                         chartInstance.bindData(chartDataModel.getData());
-                        chartInstance.setSize(258,230);
+                        chartInstance.setSize(208,230);
                         chartInstance.createRender("id","chart_previewcontanier");
                         chartInstance.draw();
                         if($("#chartdatatype_ontime").attr("checked") && $("#chartrefresh").val() && parseInt($("#chartrefresh").val()) != 0){
@@ -144,12 +257,11 @@
                 }
 
             }else{
-                alert("请填写CI关键字、KPI字段、选择实时或历史并后再进行预览")
+                alert("请选择KPI、选择CI、选择实时或历史并后再进行预览")
             }
         });
 
-        //初始化KPI的选中项
-        chartDatasourceKPI.val(chartOptionsobj.chartDatasourceKPI);
+
         //为实时kpi选择框绑定选中事件
         chartDatatypeOntime.on("click", function (e) {
             if($(this).attr("checked")){
@@ -158,9 +270,8 @@
                 $("#chartdatatype_history").removeAttr("checked");
                 $("#uchart_setting_attr_daterange").removeClass("uchart_setting_attr_show");
                 $("#uchart_setting_attr_daterange").addClass("uchart_setting_attr_hidden");
-                $("#chartdaterange").val("");
-                $("#chartstarttime").val("");
-                $("#chartendtime").val("");
+                $("#chartdatehour").val("");
+                $("#chartdatemin").val("");
 
                 //显示实时kpi参数
                 $("#uchart_setting_attr_refresh").removeClass("uchart_setting_attr_hidden");
@@ -190,19 +301,18 @@
                 //清空和隐藏历史kpi参数
                 $("#uchart_setting_attr_daterange").removeClass("uchart_setting_attr_show");
                 $("#uchart_setting_attr_daterange").addClass("uchart_setting_attr_hidden");
-                $("#chartdaterange").val("");
-                $("#chartstarttime").val("");
-                $("#chartendtime").val("");
+                $("#chartdatehour").val("");
+                $("#chartdatemin").val("");
             }
         });
         //设置开始和结束时间字段
-        $("#chartdaterange").daterangepicker({
+        /*$("#chartdaterange").daterangepicker({
             format: 'YYYY-MM-DD hh:mm:ss',
             timePicker: true
         }, function (start, end) {
             $("#chartstarttime").val(start.format('YYYY-MM-DD hh:mm:ss'));
             $("#chartendtime").val(end.format('YYYY-MM-DD hh:mm:ss'));
-        });
+        });*/
 
         var getResultOptions = function () {
             var chartOptions = {};
@@ -211,14 +321,23 @@
             if(!$("#chartOffset").val()){
                 chartOptions.chartOffset = 0;
             }
-            chartOptions.chartDatasourcehost = $("#chartDatasourcehost").val();
+            chartOptions.chartDatasourcehost = kpiRelCIResult;
+
             chartOptions.chartRefreshInterval = parseInt($("#chartrefresh").val());
             if(!$("#chartrefresh").val()){
                 chartOptions.chartRefreshInterval = 0;
             }
-            chartOptions.chartStarttime = $("#chartstarttime").val();
-            chartOptions.chartEndtime = $("#chartendtime").val();
-            chartOptions.chartDatasourceKPI = $("#chartDatasourceKPI").val();
+            chartOptions.chartDateHour = parseInt($("#chartdatehour").val());
+            if(!$("#chartdatehour").val()){
+                chartOptions.chartDateHour = 0;
+            }
+            chartOptions.chartDateMin = parseInt($("#chartdatemin").val());
+            if(!$("#chartdatemin").val()){
+                chartOptions.chartDateMin = 0;
+            }
+
+            chartOptions.chartDatasourceKPI = kpiResult;
+
             if($("#chartxaxis").attr("checked")){
                 chartOptions.chartxAxisCheck = true;
             }else{
@@ -249,18 +368,45 @@
             var rtn = true;
 
             //判断主机名是否为空
-            if( !$("#chartDatasourcehost").val() ){
+            if( !kpiRelCIResult ){
+                rtn = false;
+            }
+
+            if( kpiRelCIResult && !(kpiRelCIResult.length > 0) ){
                 rtn = false;
             }
 
             //判断是否选择了KPI
-            if( !$("#chartDatasourceKPI").val() ){
+            if( !kpiResult ){
                 rtn = false;
             }
 
-            //判断选择了实时，
+            //判断选择了实时，或者历史
             if( !$("#chartdatatype_ontime").attr("checked") && !$("#chartdatatype_history").attr("checked") ){
                 rtn = false;
+            }
+
+            //判断选择历史后是否填写了小时和分钟，如果都没有填写则不通过
+            if($("#chartdatatype_history").attr("checked")){
+                if((!$("#chartdatehour").val() && !$("#chartdatemin").val())){
+
+                    rtn = false;
+                }
+                if($("#chartdatehour").val() && !/\d+/g.test($("#chartdatehour").val())){
+                    rtn = false;
+                }
+
+                if($("#chartdatemin").val() && !/\d+/g.test($("#chartdatemin").val())){
+                    rtn = false;
+                }
+
+                if((!$("#chartdatehour").val() || $("#chartdatehour").val() == 0) && $("#chartdatemin").val() <= 0){
+                    rtn = false;
+                }
+
+                if((!$("#chartdatemin").val() || $("#chartdatemin").val() == 0) && $("#chartdatehour").val() <= 0){
+                    rtn = false;
+                }
             }
 
             return rtn;

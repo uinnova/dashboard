@@ -1,6 +1,6 @@
 /*!
  * dashboard - JS for Debug
- * @licence dashboard - v0.1.0 (2014-09-17)
+ * @licence dashboard - v0.1.0 (2014-09-18)
  */
 /**
  * Created by leiting on 14/9/12.
@@ -440,7 +440,7 @@
         var html = "";
 
         var dict = {
-            chartWidth: 258,
+            chartWidth: 208,
             chartHeight: 230,
             chartContanierHeight: 258
         };

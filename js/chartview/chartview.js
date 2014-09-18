@@ -158,7 +158,7 @@
         var html = "";
 
         var dict = {
-            chartWidth: 258,
+            chartWidth: 208,
             chartHeight: 230,
             chartContanierHeight: 258
         };
