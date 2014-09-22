@@ -12,9 +12,17 @@
     };
     instanceCategory.BAR = function () {
 
+        var bar = new ubarb();
+        bar.setType(0);
+
+        return bar;
     };
     instanceCategory.HBAR = function () {
 
+        var hbar = new ubb();
+        hbar.setType(0);
+
+        return hbar;
     };
     instanceCategory.CICLE = function () {
 
@@ -22,8 +30,8 @@
         cicle.setCircle(false);//是否生成圆环
         cicle.setType(0);
         cicle.setIcon(false);
-        return cicle;
 
+        return cicle;
     };
     instanceCategory.DASHBOARD = function () {
 
@@ -33,18 +41,36 @@
     };
     instanceCategory.LINE = function () {
 
+        var line = new uline();
+        line.setType(0);
+        line.setLinecategory("basis");
+
+        return line;
     };
     instanceCategory.PIE = function () {
 
+        var pie = new upieb();
+        pie.setCircle(false);//是否生成圆环
+        pie.setType(0);
+        pie.setIcon(true);
+
+        return pie;
     };
     instanceCategory.RADAR = function () {
 
+        var radar = new uradarb();
+        radar.setType(0);
+
+        return radar;
     };
     instanceCategory.SCATTER = function () {
 
     };
     instanceCategory.NUMBER = function () {
 
+        var number = new unumb();
+
+        return number;
     };
 
     var getInstance = function (option) {

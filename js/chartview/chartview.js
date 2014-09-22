@@ -240,6 +240,11 @@
      * chartView的相关方法执行全部封装在这个接口中，外部只要调用此接口即可执行
      */
     fn.excute = function () {
+        var cfg = {
+            "color":"white",
+            "bgColor":"gray",
+            "fontSize":"25px"
+        };
         if(this.mxCelllist.length > 0){
             clearInterval();
             for(var i = 0 ; i < this.mxCelllist.length ; i++){
@@ -259,7 +264,7 @@
                 this.graph.refresh(mxCell);
 
                 mxCell.chartInstance.createRender("id",chartOptions.chartContanierId);
-                mxCell.chartInstance.draw();
+                mxCell.chartInstance.draw(cfg);
                 if(chartOptions.chartonTimeCheck && chartOptions.chartRefreshInterval > 0){
                     mxCell.chartInstance.updateInterval(mxCell.chartInstance);
                 }

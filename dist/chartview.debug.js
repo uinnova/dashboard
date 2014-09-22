@@ -145,57 +145,162 @@
      */
     fn.DataSource = {};
 
-    fn.DataSource.AREA = function () {
+    fn.DataSource.AREA = function (option) {
 
     };
 
-    fn.DataSource.BAR = function () {
+    fn.DataSource.BAR = function (option) {
+        var dataset  = [{
+            "name":"IBM",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"BMC",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"Oracle",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"HP",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"CISCO",
+            "value":Math.floor(Math.random() * 20)
+        }];
 
+        return dataset;
     };
 
-    fn.DataSource.HBAR = function () {
+    fn.DataSource.HBAR = function (option) {
+        var dataset  = [{
+            "name":"IBM",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"BMC",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"Oracle",
+            "value":Math.floor(Math.random() * 20)
+        }];
 
+        return dataset;
     };
 
-    fn.DataSource.CICLE = function () {
+    fn.DataSource.CICLE = function (option) {
 
         //随机生成环状图的数据
-        var temppiepdataset = [];
+        var dataset = [];
         var temppiepsub1 = Math.floor(Math.random() * 100);
         var temppiepsub2 = 100 - temppiepsub1;
-        temppiepdataset.push(temppiepsub1);
-        temppiepdataset.push(temppiepsub2);
+        dataset.push(temppiepsub1);
+        dataset.push(temppiepsub2);
 
-        return temppiepdataset;
-
-    };
-
-    fn.DataSource.DASHBOARD = function () {
+        return dataset;
 
     };
 
-    fn.DataSource.FUNNEL = function () {
+    fn.DataSource.DASHBOARD = function (option) {
 
     };
 
-    fn.DataSource.LINE = function () {
+    fn.DataSource.FUNNEL = function (option) {
 
     };
 
-    fn.DataSource.PIE = function () {
+    fn.DataSource.LINE = function (option) {
+        var dataset = [{
+            "name":"北京",
+            "values":[{
+                "date":"2011-10-01 12:48:01",
+                "value":23.1
+            },{
+                "date":"2011-10-01 12:48:02",
+                "value":24.1
+            },{
+                "date":"2011-10-01 12:48:03",
+                "value":43.3
+            },{
+                "date":"2011-10-01 12:48:04",
+                "value":23.5
+            },{
+                "date":"2011-10-01 12:48:05",
+                "value":45.1
+            },{
+                "date":"2011-10-01 12:48:06",
+                "value":27.1
+            },{
+                "date":"2011-10-01 12:48:07",
+                "value":42.1
+            },{
+                "date":"2011-10-01 12:48:08",
+                "value":26.1
+            }]
+        }];
+
+        return dataset;
+    };
+
+    fn.DataSource.PIE = function (option) {
+        var dataset  = [{
+            "name":"IBM",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"BMC",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"Oracle",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"HP",
+            "value":Math.floor(Math.random() * 20)
+        },{
+            "name":"CISCO",
+            "value":Math.floor(Math.random() * 20)
+        }];
+
+        return dataset;
+    };
+
+    fn.DataSource.RADAR = function (option) {
+        var dataset = [
+            {
+                'name':'Smartphone',
+                'value':[
+                    {axis:"Email",value:0.59},
+                    {axis:"Social Networks",value:0.56},
+                    {axis:"Internet Banking",value:0.42},
+                    {axis:"News Sportsites",value:0.34},
+                    {axis:"Search Engine",value:0.48},
+                    {axis:"View Shopping sites",value:0.14},
+                    {axis:"Paying Online",value:0.11}
+                ]
+
+            },{
+                'name':'Tablet',
+                'value':[
+                    {axis:"Email",value:0.48},
+                    {axis:"Social Networks",value:0.41},
+                    {axis:"Internet Banking",value:0.27},
+                    {axis:"News Sportsites",value:0.28},
+                    {axis:"Search Engine",value:0.46},
+                    {axis:"View Shopping sites",value:0.29},
+                    {axis:"Paying Online",value:0.11}
+                ]
+            }
+
+        ];
+
+        return dataset;
+    };
+
+    fn.DataSource.SCATTER = function (option) {
 
     };
 
-    fn.DataSource.RADAR = function () {
+    fn.DataSource.NUMBER = function (option) {
+        var dataset = [Math.floor(Math.random() * 9),Math.floor(Math.random() * 9),Math.floor(Math.random() * 9),
+            Math.floor(Math.random() * 9)];
 
-    };
-
-    fn.DataSource.SCATTER = function () {
-
-    };
-
-    fn.DataSource.NUMBER = function () {
-
+        return dataset;
     };
 
     /**
@@ -238,9 +343,17 @@
     };
     instanceCategory.BAR = function () {
 
+        var bar = new ubarb();
+        bar.setType(0);
+
+        return bar;
     };
     instanceCategory.HBAR = function () {
 
+        var hbar = new ubb();
+        hbar.setType(0);
+
+        return hbar;
     };
     instanceCategory.CICLE = function () {
 
@@ -248,8 +361,8 @@
         cicle.setCircle(false);//是否生成圆环
         cicle.setType(0);
         cicle.setIcon(false);
-        return cicle;
 
+        return cicle;
     };
     instanceCategory.DASHBOARD = function () {
 
@@ -259,18 +372,36 @@
     };
     instanceCategory.LINE = function () {
 
+        var line = new uline();
+        line.setType(0);
+        line.setLinecategory("basis");
+
+        return line;
     };
     instanceCategory.PIE = function () {
 
+        var pie = new upieb();
+        pie.setCircle(false);//是否生成圆环
+        pie.setType(0);
+        pie.setIcon(true);
+
+        return pie;
     };
     instanceCategory.RADAR = function () {
 
+        var radar = new uradarb();
+        radar.setType(0);
+
+        return radar;
     };
     instanceCategory.SCATTER = function () {
 
     };
     instanceCategory.NUMBER = function () {
 
+        var number = new unumb();
+
+        return number;
     };
 
     var getInstance = function (option) {
@@ -522,6 +653,11 @@
      * chartView的相关方法执行全部封装在这个接口中，外部只要调用此接口即可执行
      */
     fn.excute = function () {
+        var cfg = {
+            "color":"white",
+            "bgColor":"gray",
+            "fontSize":"25px"
+        };
         if(this.mxCelllist.length > 0){
             clearInterval();
             for(var i = 0 ; i < this.mxCelllist.length ; i++){
@@ -541,7 +677,7 @@
                 this.graph.refresh(mxCell);
 
                 mxCell.chartInstance.createRender("id",chartOptions.chartContanierId);
-                mxCell.chartInstance.draw();
+                mxCell.chartInstance.draw(cfg);
                 if(chartOptions.chartonTimeCheck && chartOptions.chartRefreshInterval > 0){
                     mxCell.chartInstance.updateInterval(mxCell.chartInstance);
                 }

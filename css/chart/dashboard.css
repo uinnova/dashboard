@@ -1,0 +1,67 @@
+
+.udbk_dialog{
+    background-color: #434343;
+    position: absolute;
+    width: 400px;
+    height: 430px;
+    overflow: hidden;
+    border: 1px solid #434343;
+    opacity: 0.9;
+    color: #FFFFFF;
+}
+.udbk_dialog_script{
+    background-color: #434343;
+    position: absolute;
+    max-width: 450px;
+    overflow: hidden;
+    border: 1px solid #434343;
+    opacity: 0.9;
+    color: #FFFFFF;
+}
+.udbk_head{
+    height: 30px;
+    background-color: #666666;
+    position: relative;
+    cursor: move;
+}
+.udbk_func{
+    display: block;
+    padding-top: 6px;
+    height: 27px;
+    width: 60px;
+    margin-top: 1px;
+    background-color: #666666;
+    color: #ffffee;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #434343;
+    cursor: pointer;
+}
+.udbk_func_active{
+    background-color: #434343;
+}
+.udbk_func:hover{
+    background-color: #434343;
+    color: #ffffee;
+    text-decoration: none;
+}
+.udbk_closed{
+    display: block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.udbk_script_error{
+    color: red;
+}
+.udbk_script_success{
+    color: #9acd32;
+}
+.udbk_script_nostart{
+    color: white;
+}
+.udbk_script_runing{
+    -webkit-animation: twinkling 1s infinite ease-in-out;
+    color: orange;
+}

@@ -231,6 +231,11 @@
         chartPreview.on("click", function (e) {
             var checkrtn = preViewCheck();
             if(checkrtn){
+                var cfg = {
+                    "color":"white",
+                    "bgColor":"gray",
+                    "fontSize":"25px"
+                };
                 var chartOptions = eval("("+getResultOptions()+")");;
                 var chartView = dashboard.getChartView();
                 var html = chartView.getPreviewTemplate("chartTemplate_default","chart_previewcontanier",chartOptions.chartTitle);
@@ -242,7 +247,7 @@
                         chartInstance.bindData(chartDataModel.getData());
                         chartInstance.setSize(208,230);
                         chartInstance.createRender("id","chart_previewcontanier");
-                        chartInstance.draw();
+                        chartInstance.draw(cfg);
                         if($("#chartdatatype_ontime").attr("checked") && $("#chartrefresh").val() && parseInt($("#chartrefresh").val()) != 0){
                             chartInstance.updateInterval(chartInstance);
                         }

@@ -1,0 +1,55 @@
+.h_bartext{
+    fill: white;
+    text-anchor: middle;
+}
+.h_bartitle{
+    font-size: 16px;
+    text-anchor: middle;
+}
+.h_axis path,.h_axis line{
+    fill: none;
+    stroke: grey;
+    shape-rendering: crispEdges;
+}
+.h_axis text{
+    fill: #666;
+}
+
+.h_axis_white path,.h_axis_white line{
+    fill: none;
+    stroke: #ffffee;
+    shape-rendering: crispEdges;
+}
+
+.h_axis_white text{
+    fill: #ffffee;
+}
+
+.linestyle{
+    fill: none;
+    stroke-width: 1px;
+}
+.linetext{
+    font-size: 11px;
+    fill: #ccc;
+}
+.bar text.value {
+    fill: white;
+}
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.axis path {
+    fill: none;
+}
+
+.x.axis line {
+    stroke: #fff;
+    stroke-opacity: 0;
+}
+
+.y.axis path {
+    stroke: black;
+}
